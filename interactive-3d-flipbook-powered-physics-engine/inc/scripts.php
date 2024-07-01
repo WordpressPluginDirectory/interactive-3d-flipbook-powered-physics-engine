@@ -6,7 +6,7 @@
       wp_register_script('react', ASSETS_JS.'react.min.js', null, '17.0.2', true);
       wp_register_script('react-dom', ASSETS_JS.'react-dom.min.js', array('react'), '17.0.2', true);
     }
-    wp_register_script(POST_ID.'-pdf-js', ASSETS_JS.'pdf.min.js', null, '2.5.207', true);
+    wp_register_script(POST_ID.'-pdf-js', ASSETS_JS.'pdf.min.js', null, '4.3.136', true);
     wp_register_script(POST_ID.'-three', ASSETS_JS.'three.min.js', null, '108', true);
     wp_register_script(POST_ID.'-html2canvas', ASSETS_JS.'html2canvas.min.js', null, '0.5', true);
 
@@ -52,7 +52,7 @@
     global $fb3d;
 
     wp_localize_script(POST_ID.'-pdf-js', 'PDFJS_LOCALE', array(
-      'pdfJsWorker'=> ASSETS_JS.'pdf.worker.js',
+      'pdfJsWorker'=> ASSETS_JS.'pdf.worker.js?ver=4.3.136',
       'pdfJsCMapUrl'=> ASSETS_CMAPS
     ));
 
