@@ -250,7 +250,12 @@
       $src = json_decode(isset($_POST['3dfb-data'])? str_replace('&x5c', '\\', str_replace('&x27', '\'', str_replace('&x22', '"', $_POST['3dfb-data']))): '{}', true);
       $data = get_post_data($id, $src? $src: []);
 
-      if(get_current_user_level()<$fb3d['user_levels']['editor']) {
+      $disallow_html = false;
+      if(defined('DISALLOW_UNFILTERED_HTML')) {
+        $disallow_html = DISALLOW_UNFILTERED_HTML;
+      }
+
+      if(get_current_user_level()<$fb3d['user_levels']['editor'] || $disallow_html) {
         $data['3dfb']['post']['ready_function'] = '';
         foreach ($data['3dfb']['pages'] as &$page) {
           $page['page_meta_data']['css_layer'] = ['css'=> '', 'html'=> '', 'js'=> ''];
