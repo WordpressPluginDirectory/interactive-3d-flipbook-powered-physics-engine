@@ -5,7 +5,7 @@ Tags: flipbook, flip book, pdf viewer, pdf flipbook, pdf to flip book
 Requires at least: 4.3
 Tested up to: 6.6
 Requires PHP: 5.3
-Stable tag: 1.15.7
+Stable tag: 1.16.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -224,6 +224,50 @@ This will open your PDF Flipbook or Image Flipbook at page 10 when it starts.
 17. Tilted unrolling flipping pages & flexible corners
 
 == Changelog ==
+
+<h4>1.16.1</h4>
+<ul>
+  <li>
+    New Single Page mode - it displays only one page
+  </li>
+  <li>
+    Added PDF search button on the toolbar
+  </li>
+  <li>
+    Added hits highlighting for search results
+  </li>
+  <li>
+    Clear hits when query is empty
+  </li>
+  <li>
+    Center page image instead of stretching
+  </li>
+  <li>
+    Using CSS classes to trigger 3D FlipBook lightbox activation
+  </li>
+  <li>
+    Added function to set all pages interactive
+  </li>
+  <li>
+    Fixed content security policy - 3D FlipBook did not appear in Safari
+  </li>
+  <li>
+    Fixed CSS layers order in RTL mode
+  </li>
+  <li>
+    Added the word "of" indicating the page number in the search status results in POT file
+  </li>
+  <li>
+    Added Goto first page and Goto last page in POT file
+  </li>
+</ul>
+
+<h4>1.15.8</h4>
+<ul>
+  <li>
+    Added stable FDFJS for old browsers
+  </li>
+</ul>
 
 <h4>1.15.7</h4>
 <ul>

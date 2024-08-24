@@ -78,6 +78,7 @@
         '3dfb-post-props-backgroundStyle'=> array('default'=> 'auto', 'qualifier'=> '%s'),
         '3dfb-post-props-highlightLinks'=> array('default'=> 'auto', 'qualifier'=> '%d'),
         '3dfb-post-props-lighting'=> array('default'=> 'auto', 'qualifier'=> '%s'),
+        '3dfb-post-props-singlePageMode'=> array('default'=> 'auto', 'qualifier'=> '%s'),
         '3dfb-post-props-gravity'=> array('default'=> 'auto', 'qualifier'=> '%f'),
         '3dfb-post-props-cachedPages'=> array('default'=> 'auto', 'qualifier'=> '%f'),
         '3dfb-post-props-renderInactivePages'=> array('default'=> 'auto', 'qualifier'=> '%d'),
