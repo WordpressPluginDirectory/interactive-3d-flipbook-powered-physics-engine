@@ -220,8 +220,9 @@
   add_action('wp_ajax_nopriv_fb3d_send_media_image', '\iberezansky\fb3d\send_media_image_json');
 
   function get_unserialized_option($name, $def) {
-    $op = get_option($name, $def);
-    return gettype($op)==='string'? unserialize($op): $op;
+    $op = get_option($name);
+    $op = gettype($op)==='string'? unserialize($op): $op;
+    return $op? $op: $def;
   }
 
   function get_book_templates() {

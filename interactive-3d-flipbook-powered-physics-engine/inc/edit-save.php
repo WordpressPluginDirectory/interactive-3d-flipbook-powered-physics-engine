@@ -102,6 +102,7 @@
         '3dfb-post-props-sheet-color'=> array('default'=> 'auto', 'qualifier'=> '%d'),
         '3dfb-post-props-sheet-side'=> array('default'=> 'auto', 'qualifier'=> '%s'),
         '3dfb-post-props-sheet-shape'=> array('default'=> 'auto', 'qualifier'=> '%d'),
+        '3dfb-post-props-sheet-stretchImages'=> array('default'=> 'auto', 'qualifier'=> '%d'),
 
         '3dfb-post-props-cover-startVelocity'=> array('default'=> 'auto', 'qualifier'=> '%f'),
         '3dfb-post-props-cover-flexibility'=> array('default'=> 'auto', 'qualifier'=> '%f'),
@@ -117,6 +118,7 @@
         '3dfb-post-props-cover-mass'=> array('default'=> 'auto', 'qualifier'=> '%f'),
         '3dfb-post-props-cover-side'=> array('default'=> 'auto', 'qualifier'=> '%s'),
         '3dfb-post-props-cover-shape'=> array('default'=> 'auto', 'qualifier'=> '%d'),
+        '3dfb-post-props-cover-stretchImages'=> array('default'=> 'auto', 'qualifier'=> '%d'),
 
         '3dfb-post-props-page-startVelocity'=> array('default'=> 'auto', 'qualifier'=> '%f'),
         '3dfb-post-props-page-flexibility'=> array('default'=> 'auto', 'qualifier'=> '%f'),
@@ -130,6 +132,7 @@
         '3dfb-post-props-page-mass'=> array('default'=> 'auto', 'qualifier'=> '%f'),
         '3dfb-post-props-page-side'=> array('default'=> 'auto', 'qualifier'=> '%s'),
         '3dfb-post-props-page-shape'=> array('default'=> 'auto', 'qualifier'=> '%d'),
+        '3dfb-post-props-page-stretchImages'=> array('default'=> 'auto', 'qualifier'=> '%d'),
 
         '3dfb-post-controlProps-actions-cmdToc-enabled'=> array('default'=> 'auto', 'qualifier'=> '%d'),
         '3dfb-post-controlProps-actions-cmdToc-enabledInNarrow'=> array('default'=> 'auto', 'qualifier'=> '%d'),

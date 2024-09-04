@@ -1,11 +1,11 @@
-=== 3D FlipBook - PDF Flipbook WordPress ===
+=== 3D FlipBook – PDF Embedder, PDF Flipbook Viewer, Flipbook Image Gallery ===
 Contributors: iberezansky
 Donate link: https://3dflipbook.net/download-wp
 Tags: flipbook, flip book, pdf viewer, pdf flipbook, pdf to flip book
 Requires at least: 4.3
 Tested up to: 6.6
 Requires PHP: 5.3
-Stable tag: 1.16.1
+Stable tag: 1.16.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -224,6 +224,36 @@ This will open your PDF Flipbook or Image Flipbook at page 10 when it starts.
 17. Tilted unrolling flipping pages & flexible corners
 
 == Changelog ==
+
+<h4>1.16.4</h4>
+<ul>
+  <li>
+    Fixed rendering stuck when search hits are displayed
+  </li>
+</ul>
+
+<h4>1.16.3</h4>
+<ul>
+  <li>
+    Support PDFs in format w, 2w, ..., 2w, where w is page width
+  </li>
+  <li>
+    Fix errors like "Cannot read properties of null (reading 'plugin')"
+  </li>
+</ul>
+
+<h4>1.16.2</h4>
+<ul>
+  <li>
+    Single PDFJS initialization
+  </li>
+  <li>
+    Fix css layers position for Safari
+  </li>
+  <li>
+    Stretch / center source images, pdf pages, htmls on book pages
+  </li>
+</ul>
 
 <h4>1.16.1</h4>
 <ul>
