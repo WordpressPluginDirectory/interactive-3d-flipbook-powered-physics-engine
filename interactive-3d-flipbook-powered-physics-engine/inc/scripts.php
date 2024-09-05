@@ -7,7 +7,7 @@
       wp_register_script('react-dom', ASSETS_JS.'react-dom.min.js', array('react'), '17.0.2', true);
     }
     wp_register_script(POST_ID.'-pdf-js', ASSETS_JS.'pdf.null.js', null, '1.0.0', true);
-    wp_register_script(POST_ID.'-three', ASSETS_JS.'three.min.js', null, '108', true);
+    wp_register_script(POST_ID.'-three', ASSETS_JS.'three.min.js', null, '125', true);
     wp_register_script(POST_ID.'-html2canvas', ASSETS_JS.'html2canvas.min.js', null, '0.5', true);
 
     wp_register_script(POST_ID.'-colorpicker', ASSETS_JS.'colorpicker.js', array('jquery'), '1.1.1', true);
