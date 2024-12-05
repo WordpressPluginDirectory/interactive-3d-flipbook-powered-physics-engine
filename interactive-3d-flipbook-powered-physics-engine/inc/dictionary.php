@@ -19,7 +19,7 @@
       $fb3d['dictionary'][$keys[$i]] = $values[$i];
     }
   }
-  add_action('plugins_loaded', '\iberezansky\fb3d\load_textdomain');
+  add_action('init', '\iberezansky\fb3d\load_textdomain');
 
   function load_dictionary() {
     return array(
@@ -322,7 +322,8 @@
       __('Trigger', POST_ID),
       __('coma separated CSS classes of any elements that can launch lightbox', POST_ID),
       __('open book on page', POST_ID),
-      __('stretch source images / pdf pages / htmls on book pages', POST_ID)
+      __('stretch source images / pdf pages / htmls on book pages', POST_ID),
+      __('Item is not found', POST_ID)
     );
   }
 ?>
