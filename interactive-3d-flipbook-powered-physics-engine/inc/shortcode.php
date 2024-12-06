@@ -120,112 +120,12 @@
     return ['atts'=> $a, 'jsData'=> $jsData];
   }
 
-  function update_templates_cache() {
-    global $fb3d;
-    $us = [];
-    foreach($fb3d['templates'] as $t) {
-      $us[$t['html']] = 1;
-      $us[$t['script']] = 1;
-      foreach($t['styles'] as $s) {
-        $us[$s] = 1;
-      }
-    }
-    $urls = [];
-    foreach($us as $u=>$v) {
-      $urls[substr($u, strpos($u, '/plugins/')+9)] = file_get_contents(template_url_to_path($u));
-    }
-
-    $path = template_url_to_path(ASSETS_JS.'skins-cache.js');
-    $old = file_exists($path)? file_get_contents($path): '';
-    $new = implode('', [
-      'FB3D_CLIENT_LOCALE.templates=', preg_replace('/"http.*?plugins\\\\\//i', '"', json_encode($fb3d['templates'])), ';',
-      'FB3D_CLIENT_LOCALE.jsData.urls=', json_encode($urls), ';'
-    ]);
-    if($old!==$new) {
-      file_put_contents($path, $new);
-    }
+  function enqueue_client_locale_loader() {
+      register_scripts_and_styles();
+      wp_enqueue_script(POST_ID.'-client-locale-loader');
   }
 
-  function get_client_dictionary() {
-    global $fb3d;
-    $us = [];
-    foreach($fb3d['templates'] as $t) {
-      $us[$t['html']] = 1;
-    }
-    $d = [];
-    foreach($us as $u=>$v) {
-      $html = file_get_contents(template_url_to_path($u));
-      preg_match_all('/<\$tr>(.*?)<\/\$tr>/', $html, $matches);
-      foreach ($matches[1] as $t) {
-        $d[$t] = aa($fb3d['dictionary'], $t, $t);
-      }
-    }
-    return $d;
-  }
-
-  function reset_client_scripts_loaded() {
-    global $fb3d;
-    $fb3d['client_scripts_loaded'] = false;
-  }
-
-  add_action('wp_head', '\iberezansky\fb3d\reset_client_scripts_loaded', 1000);
-
-  function client_locale_loader() {
-    global $fb3d;
-    $out = '';
-    if(!$fb3d['client_scripts_loaded']) {
-      $fb3d['client_scripts_loaded'] = true;
-      wp_enqueue_script('jquery');
-      update_templates_cache();
-      ob_start();
-      ?>
-      <script type="text/javascript">
-        if(!window.FB3D_CLIENT_LOCALE) {
-          window.PDFJS_LOCALE=<?php echo(json_encode(get_pdf_js_locale())) ?>;
-          window.FB3D_LOCALE=<?php echo(json_encode(['dictionary'=> get_client_dictionary()])) ?>;
-          window.FB3D_CLIENT_LOCALE=<?php echo(json_encode([
-            'key'=> POST_ID,
-            'ajaxurl'=> admin_url('admin-ajax.php'),
-            'pluginsurl'=> substr(URL, 0, strpos(URL, '/plugins/')+9),
-            'images'=> ASSETS_IMAGES,
-            'jsData'=> $fb3d['jsData'],
-            'thumbnailSize'=> get_thumbnail_size()
-          ])) ?>;
-          function fb3dFetch(url) {
-            return new Promise(function(resolve, reject) {
-              jQuery.ajax({url: url, dataType: 'text'}).done(resolve).fail(reject);
-            });
-          }
-          function fb3dClientScriptsLoader() {
-            if(window.jQuery && typeof jQuery.ajax==='function') {
-              var isStable = !Promise.withResolvers || /^((?!chrome|android).)*safari/i.test(navigator.userAgent), pdfJs = PDFJS_LOCALE;
-              window.PDFJS_LOCALE={pdfJsCMapUrl: pdfJs.pdfJsCMapUrl, pdfJsWorker: isStable? pdfJs.stablePdfJsWorker: pdfJs.pdfJsWorker};
-              Promise.all([
-                fb3dFetch('<?php echo(ASSETS_CSS.'client.css?ver='.VERSION) ?>'),
-                fb3dFetch('<?php echo(ASSETS_JS.'skins-cache.js?ver='.VERSION) ?>'),
-                fb3dFetch(isStable? pdfJs.stablePdfJsLib: pdfJs.pdfJsLib),
-                fb3dFetch('<?php echo(ASSETS_JS.'three.min.js?ver=125') ?>'),
-                fb3dFetch('<?php echo(ASSETS_JS.'html2canvas.min.js?ver=0.5') ?>'),
-                fb3dFetch('<?php echo(ASSETS_JS.'client.min.js?ver='.VERSION) ?>'),
-              ]).then(function(fs) {
-                jQuery('head').append(['<style type="text/css">', fs[0], '</style>'].join(''));
-                for(var i = 1; i<fs.length; ++i) {
-                  eval(fs[i]);
-                }
-              });
-            }
-            else {
-              setTimeout(fb3dClientScriptsLoader, 100);
-            }
-          }
-          fb3dClientScriptsLoader();
-        }
-      </script>
-      <?php
-      $out = ob_get_clean();
-    }
-    return $out;
-  }
+  add_action('wp_enqueue_scripts', '\iberezansky\fb3d\enqueue_client_locale_loader');
 
   function to_single_quotes($s) {
     return str_replace('"', '\'', $s);
@@ -276,11 +176,11 @@
         $r .= sprintf(' style="%s"', to_single_quotes($atts['style']));
       }
 
-      $res = client_locale_loader().($is_link? $r.'>'.$content.'</a>' :$r.'></div>'.$content).($jsData? implode([
+      $res = ($is_link? $r.'>'.$content.'</a>' :$r.'></div>'.$content).($jsData? implode([
       '<script type="text/javascript">',
         'window.FB3D_CLIENT_DATA = window.FB3D_CLIENT_DATA || [];',
-        'window.FB3D_CLIENT_DATA.push(\''.base64_encode(json_encode($jsData)).'\');',
-        'FB3D_CLIENT_LOCALE.render && FB3D_CLIENT_LOCALE.render();',
+        'FB3D_CLIENT_DATA.push(\''.base64_encode(json_encode($jsData)).'\');',
+        'window.FB3D_CLIENT_LOCALE && FB3D_CLIENT_LOCALE.render && FB3D_CLIENT_LOCALE.render();',
       '</script>']): '');
     }
     else {

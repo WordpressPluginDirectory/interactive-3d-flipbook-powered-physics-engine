@@ -15,6 +15,8 @@
     wp_register_script(POST_ID.'-settings', ASSETS_JS.'settings.min.js', array('react', 'react-dom', 'jquery'), VERSION, true);
     wp_register_script(POST_ID.'-shortcode-generator', ASSETS_JS.'shortcode-generator.js', array('react', 'react-dom', 'jquery', POST_ID.'-insert'), VERSION, true);
 
+    wp_register_script(POST_ID.'-client-locale-loader', ASSETS_JS.'client-locale-loader.js', ['jquery'], VERSION, ['strategy'=> 'async']);
+
     localize_scripts();
   }
 
@@ -105,6 +107,19 @@
       'license'=> $fb3d['options']['license'],
       'nonce'=> wp_create_nonce(NONCE)
     ));
+
+    wp_localize_script(POST_ID.'-client-locale-loader', 'FB3D_CLIENT_LOCALE', [
+      'ajaxurl'=> admin_url('admin-ajax.php'),
+      'dictionary'=> get_client_dictionary(),
+      'images'=> ASSETS_IMAGES,
+      'jsData'=> $fb3d['jsData'],
+      'key'=> POST_ID,
+      'pdfJS'=> get_pdf_js_locale(),
+      'pluginsurl'=> substr(URL, 0, strpos(URL, '/plugins/')+9),
+      'pluginurl'=> URL,
+      'thumbnailSize'=> $thumbnailSize,
+      'version'=> VERSION
+    ]);
 
   }
 

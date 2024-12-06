@@ -21,6 +21,23 @@
   }
   add_action('init', '\iberezansky\fb3d\load_textdomain');
 
+  function get_client_dictionary() {
+    global $fb3d;
+    $us = [];
+    foreach($fb3d['templates'] as $t) {
+      $us[$t['html']] = 1;
+    }
+    $d = [];
+    foreach($us as $u=>$v) {
+      $html = file_get_contents(template_url_to_path($u));
+      preg_match_all('/<\$tr>(.*?)<\/\$tr>/', $html, $matches);
+      foreach ($matches[1] as $t) {
+        $d[$t] = aa($fb3d['dictionary'], $t, $t);
+      }
+    }
+    return $d;
+  }
+
   function load_dictionary() {
     return array(
       __('auto', POST_ID),
